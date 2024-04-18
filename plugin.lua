@@ -1,10 +1,19 @@
+---@diagnostic disable: need-check-nil, undefined-field
 function draw()
     local bookmarks = map.bookmarks
 
     imgui.Begin("BookmarkLeaper")
 
     local selectedIndex = state.GetValue("selectedIndex") or 0
+    local searchTerm = state.GetValue("searchTerm") or ""
+    local filterTerm = state.GetValue("filterTerm") or ""
     local times = {}
+
+    imgui.PushItemWidth(120)
+
+    _, searchTerm = imgui.InputText("Search", searchTerm, 4096)
+    imgui.SameLine()
+    _, filterTerm = imgui.InputText("Filter Out", filterTerm, 4096)
 
     imgui.Columns(3)
 
@@ -22,6 +31,13 @@ function draw()
     for idx, v in pairs(bookmarks) do
         if (v.StartTime < 0) then
             skippedBookmarks = skippedBookmarks + 1
+            goto continue
+        end
+
+        if (searchTerm:len() > 0) and (not v.Note:find(searchTerm)) then
+            goto continue
+        end
+        if (filterTerm:len() > 0) and (v.Note:find(filterTerm)) then
             goto continue
         end
 
@@ -53,10 +69,8 @@ function draw()
     imgui.SetColumnWidth(2, 75)
 
     state.SetValue("selectedIndex", selectedIndex)
+    state.SetValue("searchTerm", searchTerm)
+    state.SetValue("filterTerm", filterTerm)
 
     imgui.End()
-end
-
-function getStartAndEndNoteOffsets()
-
 end
