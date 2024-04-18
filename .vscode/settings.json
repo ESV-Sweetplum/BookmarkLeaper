@@ -1,0 +1,15 @@
+{
+  "Lua.diagnostics.globals": [
+    "imgui",
+    "draw",
+    "state",
+    "map",
+    "utils",
+    "action_type",
+    "actions"
+],
+"Lua.diagnostics.disable": [
+    "lowercase-global",
+    "cast-local-type"
+]
+}
