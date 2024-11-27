@@ -1,3 +1,6 @@
+> [!IMPORTANT]  
+> This plugin has been merged with [plumoguSV](https://github.com/ESV-Sweetplum/plumoguSV), meaning support for it is deprecated.
+
 # BookmarkLeaper v1.0.1
 
 BookmarkLeaper is a simple plugin, that lists all bookmarks, and allows you to jump to any one of them.
